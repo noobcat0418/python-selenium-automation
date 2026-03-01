@@ -1,0 +1,103 @@
+name: E2E Auth Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  smoke-tests:
+    name: Smoke Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Playwright browsers
+        run: playwright install chromium --with-deps
+
+      - name: Run smoke tests
+        run: |
+          pytest -m smoke \
+            --reruns=2 \
+            --reruns-delay=5 \
+            --alluredir=reports/allure-results \
+            --screenshot=only-on-failure \
+            --video=retain-on-failure
+
+      - name: Upload Allure results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: smoke-allure-results
+          path: reports/allure-results/
+          retention-days: 30
+
+      - name: Upload failure artifacts
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: smoke-failure-screenshots
+          path: test-results/
+          retention-days: 10
+
+  full-suite:
+    name: Full E2E Suite
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    needs: smoke-tests
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Playwright browsers
+        run: playwright install chromium --with-deps
+
+      - name: Run full test suite
+        run: |
+          pytest \
+            --reruns=2 \
+            --reruns-delay=5 \
+            --alluredir=reports/allure-results \
+            --screenshot=only-on-failure \
+            --video=retain-on-failure \
+            --tracing=retain-on-failure
+        continue-on-error: true
+
+      - name: Upload Allure results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: full-suite-allure-results
+          path: reports/allure-results/
+          retention-days: 30
+
+      - name: Upload failure artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: full-suite-test-results
+          path: test-results/
+          retention-days: 10

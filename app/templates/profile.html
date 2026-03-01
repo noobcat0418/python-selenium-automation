@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Profile — Auth Demo{% endblock %}
+
+{% block content %}
+<div class="card profile-card">
+    <h1>User Profile</h1>
+
+    <div class="user-info" data-testid="profile-info">
+        <div class="info-row">
+            <span class="label">Name:</span>
+            <span class="value" data-testid="profile-name">{{ user.name }}</span>
+        </div>
+        <div class="info-row">
+            <span class="label">Email:</span>
+            <span class="value" data-testid="profile-email">{{ user.sub }}</span>
+        </div>
+        <div class="info-row">
+            <span class="label">Auth Provider:</span>
+            <span class="value" data-testid="profile-provider">{{ user.provider }}</span>
+        </div>
+    </div>
+
+    <nav class="dashboard-nav">
+        <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+        <a href="/logout" class="btn btn-outline" data-testid="logout-button">Sign Out</a>
+    </nav>
+</div>
+{% endblock %}

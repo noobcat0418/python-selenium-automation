@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Test Artifacts
+reports/
+screenshots/
+test-results/
+allure-results/
+*.log
+
+# Playwright
+playwright-report/
+blob-report/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+*.env.local
+
+# Local config
+.claude/
+
+# Windows artifacts
+NUL

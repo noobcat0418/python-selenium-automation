@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}{{ provider.name }} Sign-In (Demo) — Auth Demo{% endblock %}
+
+{% block content %}
+<div class="card oauth-card">
+    <div class="oauth-demo-notice" data-testid="oauth-demo-notice">
+        THIS IS A DEMO — Not a real {{ provider.name }} sign-in page
+    </div>
+
+    <div class="oauth-header" style="border-left: 4px solid {{ provider.color }};">
+        <span class="oauth-provider-icon" style="background: {{ provider.color }};">
+            {{ provider.icon }}
+        </span>
+        <h1>Sign in with {{ provider.name }}</h1>
+    </div>
+
+    <p class="oauth-description">
+        <strong>Auth E2E Test App</strong> wants to access your
+        <strong>{{ provider.name }}</strong> account.
+    </p>
+
+    <div class="oauth-permissions">
+        <p>This app will receive:</p>
+        <ul>
+            <li>Your email address (mock)</li>
+            <li>Your display name (mock)</li>
+        </ul>
+    </div>
+
+    <form method="post" action="/oauth/{{ provider_key }}/callback" class="oauth-actions">
+        <input type="hidden" name="state" value="{{ state }}">
+        <button type="submit" name="action" value="allow"
+                class="btn btn-primary" data-testid="oauth-allow-button"
+                style="background: {{ provider.color }};">
+            Allow
+        </button>
+        <button type="submit" name="action" value="deny"
+                class="btn btn-outline" data-testid="oauth-deny-button">
+            Deny
+        </button>
+    </form>
+
+    <p class="demo-note">
+        No real credentials are used. This simulates an OAuth consent flow for testing.
+    </p>
+</div>
+{% endblock %}

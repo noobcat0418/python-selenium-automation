@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Login — Auth Demo{% endblock %}
+
+{% block content %}
+<div class="card login-card">
+    <h1>Sign In</h1>
+    <p class="subtitle">Demo Authentication System</p>
+
+    {% if error %}
+    <div class="error-message" data-testid="error-message" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <form method="post" action="/login" data-testid="login-form">
+        <input type="hidden" name="next" value="{{ next }}">
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="demo@example.com"
+                data-testid="email-input"
+                required
+                autocomplete="email"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                data-testid="password-input"
+                required
+                autocomplete="current-password"
+            >
+        </div>
+
+        <button type="submit" class="btn btn-primary" data-testid="login-button">
+            Sign In
+        </button>
+    </form>
+
+    <div class="divider">
+        <span>or continue with</span>
+    </div>
+
+    <div class="oauth-buttons">
+        <a href="/oauth/google/login" class="btn btn-oauth btn-google" data-testid="google-oauth-button">
+            <span class="oauth-icon">G</span>
+            Sign in with Google (Demo)
+        </a>
+        <a href="/oauth/microsoft/login" class="btn btn-oauth btn-microsoft" data-testid="microsoft-oauth-button">
+            <span class="oauth-icon">M</span>
+            Sign in with Microsoft (Demo)
+        </a>
+    </div>
+
+    <p class="demo-note">
+        Test credentials: <code>demo@example.com</code> / <code>Password123!</code>
+    </p>
+</div>
+{% endblock %}

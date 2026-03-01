@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard — Auth Demo{% endblock %}
+
+{% block content %}
+<div class="card dashboard-card">
+    <div class="dashboard-header">
+        <h1 data-testid="welcome-message">Welcome, {{ user.name }}</h1>
+        <a href="/logout" class="btn btn-outline" data-testid="logout-button">Sign Out</a>
+    </div>
+
+    <div class="user-info" data-testid="user-info">
+        <div class="info-row">
+            <span class="label">Email:</span>
+            <span class="value" data-testid="user-email">{{ user.sub }}</span>
+        </div>
+        <div class="info-row">
+            <span class="label">Provider:</span>
+            <span class="value" data-testid="user-provider">{{ user.provider }}</span>
+        </div>
+    </div>
+
+    <nav class="dashboard-nav">
+        <a href="/profile" class="btn btn-secondary" data-testid="profile-link">View Profile</a>
+    </nav>
+
+    <p class="demo-note">
+        This is a protected page. Only authenticated users can access it.
+    </p>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+# E2E Auth Testing Configuration
+server:
+  host: "127.0.0.1"
+  port: 8000
+  base_url: "http://127.0.0.1:8000"
+
+# Timeouts (milliseconds for Playwright)
+timeouts:
+  navigation: 10000
+  action: 5000
+  server_startup: 15
+
+# Authentication settings
+auth:
+  jwt_secret: "test-secret-key-for-e2e-testing-only"
+  token_expiry_minutes: 30
+  short_token_expiry_seconds: 5
+
+# Rate limiting
+rate_limit:
+  max_attempts: 5
+  lockout_seconds: 30
+  cooldown_test_seconds: 3
+
+# Browser settings
+browser:
+  name: "chromium"
+  headless: true
+  viewport_width: 1280
+  viewport_height: 720
