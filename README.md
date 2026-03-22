@@ -12,18 +12,18 @@ End-to-end test automation suite for modern authentication flows. Built with **P
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│                  Playwright E2E Tests                │
+│                  Playwright E2E Tests               │
 │  email_login · oauth_login · logout · session       │
-│  protected_routes · rate_limiting · network          │
+│  protected_routes · rate_limiting · network         │
 ├─────────────────────────────────────────────────────┤
-│                  Test Utilities                       │
-│  auth_helpers · test_data · network_helpers          │
+│                  Test Utilities                     │
+│  auth_helpers · test_data · network_helpers         │
 ├─────────────────────────────────────────────────────┤
-│            FastAPI Mock Auth Server (SUT)             │
-│  JWT Auth · Mock OAuth · Rate Limiting · Templates   │
+│            FastAPI Mock Auth Server (SUT)           │
+│  JWT Auth · Mock OAuth · Rate Limiting · Templates  │
 ├─────────────────────────────────────────────────────┤
-│                  Infrastructure                      │
-│  GitHub Actions CI · Allure Reports · Config         │
+│                  Infrastructure                     │
+│  GitHub Actions CI · Allure Reports · Config        │
 └─────────────────────────────────────────────────────┘
 ```
 
